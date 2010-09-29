@@ -1,0 +1,4 @@
+Jednoduchy prevodnik men pro prikazovou radku. Vyuziva kurzu devizoveho trhu CNB:
+http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt
+
+Prevod z CZK na dany kurz a naopak.
