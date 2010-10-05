@@ -1,6 +1,11 @@
-Jednoduchy prevodnik men pro prikazovou radku. Vyuziva kurzu devizoveho trhu CNB:
-http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt
+[exCurr.py]
 
-datum lze menit pomoci ?date=DD.MM.YYYY
+Jednoduchy prevodnik men podle kurzovniho listku CNB (Ceske narodni banky) pro prikazovou radku.
+Prozatim funguje jen prevod men z a do CZK (ceskych korun).
 
-Prevod z CZK na dany kurz a naopak.
+Zatim nefunguje jako samostatny program, lze jej pouzit jako python modul.
+
+[todo]
+- funkcnost + optparse
+- "cache" pro stahovani aktualniho listku
+- nastaveni data kurzovniho listku (lze menit pomoci ?date=DD.MM.YYYY)
