@@ -3,9 +3,32 @@
 Jednoduchy prevodnik men podle kurzovniho listku CNB (Ceske narodni banky) pro prikazovou radku.
 Prozatim funguje jen prevod men z a do CZK (ceskych korun).
 
-Zatim nefunguje jako samostatny program, lze jej pouzit jako python modul.
+Instalace (da-li se to tak nazvat):
+-----------------------------------
+  1. stazeni do lib. adresare:
+      git clone http://github.com/jakubjedelsky/exCurr.git
+      pripadne stahnoutprimo balicek z www
+  2. nastaveni prav:
+      chmod +x exCurr/exCurr.py
+  3. symlink do adresare se spustitelnymi soubory (napr. ~/bin):
+      ln -s `pwd`/exCurr/ecCurr.py ~/bin/exCurr
+
+Pouziti: 
+--------
+    exCurr.py [options] CASTKA
+
+Options:
+  -h, --help            zobrazi tuto napovedu a skonci
+  -f KOD_MENY, --from=KOD_MENY
+                        Urcuje z jake meny bude prevadet na CZK
+  -t KOD_MENY, --to=KOD_MENY
+                        Urcuje na jakou menu bude z CZK prevadet.
+  -l, --list            vypis kurzu dle CNB (Ceska nardni banka)
+  -a                    Vypise dostupne kody men a skonci.
+
 
 [todo]
-- funkcnost + optparse
+- to_curr i from_curr dela skoro to stejny, lze zpracovat
+- list_data() zobrazuje rozhozenou tabulku
 - "cache" pro stahovani aktualniho listku
 - nastaveni data kurzovniho listku (lze menit pomoci ?date=DD.MM.YYYY)
