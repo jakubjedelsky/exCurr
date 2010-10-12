@@ -30,5 +30,6 @@ Options:
 [todo]
 - to_curr i from_curr dela skoro to stejny, lze zpracovat
 - list_data() zobrazuje rozhozenou tabulku
+- zprehlednit vypis kodu men (pridat stat)
 - "cache" pro stahovani aktualniho listku
 - nastaveni data kurzovniho listku (lze menit pomoci ?date=DD.MM.YYYY)
