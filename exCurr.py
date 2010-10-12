@@ -10,6 +10,7 @@ from optparse import OptionParser
 import re
 import urllib2
 import string
+import sys
 
 class gv:
 	"""
@@ -46,6 +47,7 @@ def get_curr(data, mena):
 	"""
 	Vrati pole s kurzem pro danou menu. [0] je mnozstvi, [1] kurz.
 	"""
+	del data[0] # datum nechceme
 	kurz = []
 	for radek in data:
 		r = radek.split("|")
@@ -87,7 +89,75 @@ def list_curr(data):
 	return mena
 
 def main():
-	pass
+	
+	# Options
+	USAGE = "%prog [options] CASTKA"
+	DESCR = "Prevede CASTKA z nebo na CZK (ceske koruny) podle aktualniho \
+kurzu Ceske narodni banky (CNB). Hodnota je zaokrouhlena na dve desetinna \
+mista. Pro oddeleni desetinnych mist pouzijte tecku."
+	EPILOG = "Zdojovy kod ke stazeni naleznete na \
+<http://github.com/jakubjedelsky/exCurr>. Pripadne chyby muzete zaslat \
+na <jakub.jedelsky@gmail.com>."
+
+	parser = OptionParser(usage=USAGE, description=DESCR, epilog=EPILOG, add_help_option=None)
+	parser.add_option("-h", "--help", action="help",
+					help="zobrazi tuto napovedu a skonci")
+	parser.add_option("-f", "--from", dest="from_curr",
+					help="Urcuje z jake meny bude prevadet na CZK", metavar="KOD_MENY")
+	parser.add_option("-t", "--to", dest="to_curr",
+					help="Urcuje na jakou menu bude z CZK prevadet.", metavar="KOD_MENY")
+	parser.add_option("-l", "--list", action="store_true",
+					help="vypis kurzu dle CNB (Ceska nardni banka)")
+	parser.add_option("-a", action="store_true",
+					help="Vypise dostupne kody men a skonci.")
+	
+	(options, args) = parser.parse_args()
+	# End Options
+	
+	if options.from_curr and options.to_curr:
+		parse.error("Je mozne pouzit jen jednu z voleb -f/--from nebo -t/--to.")
+	
+	if len(args) > 1:
+		parser.error("Muzete zadat maximalne jeden argument typu CASTKA (cislo).")
+	
+	data = get_data()
+	
+	if options.to_curr:
+		try:
+			castka = float(args[0])
+		except (IndexError, ValueError):
+			sys.exit("Nezadali jste CASTKA nebo zadana hodnota neni cislo.\nNapovedu lze zobrazit pomoci prepinace '-h'.")
+		mena = options.to_curr
+		kurz = get_curr(data, mena)
+		if not kurz:
+			sys.exit("Kurz nenalezen, je mena zadana spravne?\nDostupne kody men vypisete pomoci prepinace '-a'")
+		kurz_en = re.sub(',', '.', kurz[1])		# desetinna cisla chceme s teckou
+		
+		vysledek = castka * (int(kurz[0])/float(kurz_en))
+		print "%.2f %s" % (vysledek, mena)
+	
+	if options.from_curr:
+		try:
+			castka = float(args[0])
+		except (IndexError, ValueError):
+			sys.exit("Nezadali jste CASTKA nebo zadana hodnota neni cislo.\nNapovedu lze zobrazit pomoci prepinace '-h'.")
+		mena = options.from_curr
+		kurz = get_curr(data, mena)
+		if not kurz:
+			sys.exit("Kurz nenalezen, je mena zadana spravne?\nDostupne kody men vypisete pomoci prepinace '-a'")
+		kurz_en = re.sub(',', '.', kurz[1])		# desetinna cisla chceme s teckou
+		
+		vysledek = castka * (float(kurz_en)/int(kurz[0]))
+		print "%.2f CZK" % vysledek
+	
+	if options.a:
+		mena = list_curr(data)
+		for i in mena:
+			print i
+	
+	if options.list:
+		print "Omlouvte snizenou kvalitu tabulky..\n-----------------------------------"
+		list_data(data)
 
 if __name__ == "__main__":
 	main()
