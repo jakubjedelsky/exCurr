@@ -118,33 +118,24 @@ na <jakub.jedelsky@gmail.com>."
 	
 	data = get_data()
 	
-	if options.to_curr:
+	if options.to_curr or options.from_curr:
 		try:
 			castka = float(args[0])
 		except (IndexError, ValueError):
 			sys.exit("Nezadali jste CASTKA nebo zadana hodnota neni cislo.\nNapovedu lze zobrazit pomoci prepinace '-h'.")
-		mena = options.to_curr
+		mena = options.to_curr or options.from_curr
 		kurz = get_curr(data, mena)
 		if not kurz:
 			sys.exit("Kurz nenalezen, je mena zadana spravne?\nDostupne kody men vypisete pomoci prepinace '-a'")
 		kurz_en = re.sub(',', '.', kurz[1])		# desetinna cisla chceme s teckou
 		
-		vysledek = castka * (int(kurz[0])/float(kurz_en))
-		print "%.2f %s" % (vysledek, mena)
-	
-	if options.from_curr:
-		try:
-			castka = float(args[0])
-		except (IndexError, ValueError):
-			sys.exit("Nezadali jste CASTKA nebo zadana hodnota neni cislo.\nNapovedu lze zobrazit pomoci prepinace '-h'.")
-		mena = options.from_curr
-		kurz = get_curr(data, mena)
-		if not kurz:
-			sys.exit("Kurz nenalezen, je mena zadana spravne?\nDostupne kody men vypisete pomoci prepinace '-a'")
-		kurz_en = re.sub(',', '.', kurz[1])		# desetinna cisla chceme s teckou
-		
-		vysledek = castka * (float(kurz_en)/int(kurz[0]))
-		print "%.2f CZK" % vysledek
+		if options.to_curr:
+			vysledek = castka * (int(kurz[0])/float(kurz_en))
+			print "%.2f %s" % (vysledek, mena)
+			
+		if options.from_curr:
+			vysledek = castka * (float(kurz_en)/int(kurz[0]))
+			print "%.2f CZK" % vysledek
 	
 	if options.a:
 		mena = list_curr(data)
