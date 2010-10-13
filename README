@@ -28,7 +28,7 @@ Options:
 
 
 [todo]
-- to_curr i from_curr dela skoro to stejny, lze zpracovat
+- to_curr i from_curr dela skoro to stejny, lze zpracovat jednou funkci
 - list_data() zobrazuje rozhozenou tabulku
 - zprehlednit vypis kodu men (pridat stat)
 - "cache" pro stahovani aktualniho listku
