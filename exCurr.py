@@ -91,9 +91,10 @@ def main():
 	DESCR = "Prevede CASTKA z nebo na CZK (ceske koruny) podle aktualniho \
 kurzu Ceske narodni banky (CNB). Hodnota je zaokrouhlena na dve desetinna \
 mista. Pro oddeleni desetinnych mist pouzijte tecku."
-	EPILOG = "Zdojovy kod ke stazeni naleznete na \
-<http://github.com/jakubjedelsky/exCurr>. Pripadne chyby muzete zaslat \
-na <jakub.jedelsky@gmail.com>."
+	EPILOG = "Web: <http://dev.stderr.cz/2010/10/excurr-prevodnik-men/>. \
+Zdojovy kod ke stazeni naleznete na <http://github.com/jakubjedelsky/exCurr>. \
+Pripadne chyby muzete zaslat na <jakub.jedelsky@gmail.com> nebo do komentaru \
+na webu."
 
 	parser = OptionParser(usage=USAGE, description=DESCR, epilog=EPILOG, add_help_option=None)
 	parser.add_option("-h", "--help", action="help",
