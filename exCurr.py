@@ -20,9 +20,6 @@ class gv:
 	url = "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt"
 
 def get_data(date=False):
-	# TODO:
-	# - vyber podle data
-	# - cache; ukladani txt do pc, aby se to nemuselo furt stahovat
 	"""
 	Vrati pole se aktualnim kurzem. [0] je datum a den v roce, [1] je hlavicka.
 	"""
@@ -62,7 +59,7 @@ def get_curr(data, mena):
 
 def list_data(data):
 	"""
-	Prehledne vypise tabulku s kurzy.
+	"Prehledne" vypise tabulku s kurzy.
 	"""
 	datum = data[0]
 	del data[0]
@@ -75,7 +72,6 @@ def list_data(data):
 		print string.ljust(r[2], 10),
 		print string.ljust(r[3], 10),
 		print string.ljust(r[4], 10)
-		#print "%20s %20s %20s %20s %20s" % (r[0], r[1], r[2], r[3], r[4])
 
 def list_curr(data):
 	"""
