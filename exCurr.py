@@ -16,7 +16,7 @@ class gv:
 	"""
 	Globalni promenne.
 	"""
-	verze = "10^-1"
+	version = "0.1"
 	url = "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt"
 
 def get_data(date=False):
@@ -96,7 +96,7 @@ Zdojovy kod ke stazeni naleznete na <http://github.com/jakubjedelsky/exCurr>. \
 Pripadne chyby muzete zaslat na <jakub.jedelsky@gmail.com> nebo do komentaru \
 na webu."
 
-	parser = OptionParser(usage=USAGE, description=DESCR, epilog=EPILOG, add_help_option=None)
+	parser = OptionParser(usage=USAGE, description=DESCR, epilog=EPILOG, version="%prog " + gv.version, add_help_option=None)
 	parser.add_option("-h", "--help", action="help",
 					help="zobrazi tuto napovedu a skonci")
 	parser.add_option("-f", "--from", dest="from_curr",
